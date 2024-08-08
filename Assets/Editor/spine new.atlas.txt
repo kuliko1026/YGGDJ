@@ -1,0 +1,110 @@
+
+spine new.png
+size: 1973,1937
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+LArm
+  rotate: true
+  xy: 695, 1732
+  size: 203, 1116
+  orig: 203, 1116
+  offset: 0, 0
+  index: -1
+Lbackhair
+  rotate: true
+  xy: 858, 326
+  size: 525, 850
+  orig: 528, 853
+  offset: 1, 1
+  index: -1
+Lfronthair
+  rotate: true
+  xy: 2, 1171
+  size: 323, 724
+  orig: 328, 726
+  offset: 3, 1
+  index: -1
+RArm
+  rotate: true
+  xy: 283, 1496
+  size: 234, 1130
+  orig: 234, 1130
+  offset: 0, 0
+  index: -1
+RLeg
+  rotate: true
+  xy: 2, 2
+  size: 322, 1460
+  orig: 322, 1462
+  offset: 0, 0
+  index: -1
+Rbackhair
+  rotate: true
+  xy: 2, 574
+  size: 514, 854
+  orig: 518, 857
+  offset: 2, 2
+  index: -1
+Rfronthair
+  rotate: true
+  xy: 1227, 853
+  size: 482, 744
+  orig: 484, 750
+  offset: 1, 4
+  index: -1
+eyelid
+  rotate: false
+  xy: 351, 1774
+  size: 342, 161
+  orig: 345, 164
+  offset: 2, 2
+  index: -1
+eyes
+  rotate: false
+  xy: 2, 1821
+  size: 347, 114
+  orig: 351, 123
+  offset: 2, 3
+  index: -1
+face
+  rotate: true
+  xy: 728, 1090
+  size: 404, 497
+  orig: 406, 499
+  offset: 1, 1
+  index: -1
+fringe
+  rotate: false
+  xy: 1415, 1337
+  size: 500, 393
+  orig: 505, 395
+  offset: 3, 1
+  index: -1
+neck
+  rotate: false
+  xy: 2, 1553
+  size: 279, 266
+  orig: 286, 271
+  offset: 5, 2
+  index: -1
+
+spine new2.png
+size: 1470,959
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+LLeg
+  rotate: true
+  xy: 2, 614
+  size: 343, 1466
+  orig: 343, 1466
+  offset: 0, 0
+  index: -1
+body
+  rotate: true
+  xy: 2, 2
+  size: 610, 1165
+  orig: 610, 1165
+  offset: 0, 0
+  index: -1
