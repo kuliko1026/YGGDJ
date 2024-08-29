@@ -53,3 +53,6 @@ TagManager:
   - name: Frontlayer
     uniqueID: 3405588557
     locked: 0
+  - name: Dialogue
+    uniqueID: 959204747
+    locked: 0
