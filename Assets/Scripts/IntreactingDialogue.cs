@@ -19,7 +19,11 @@ public class IntreactingDialogue : MonoBehaviour
   
     void Update()
     {
-         
+         /*if (Input.GetKeyDown(KeyCode.D))
+        {
+            dialogueText.text = clothesText;
+            dialogueBox.SetActive(true);
+        }*/
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,8 +31,9 @@ public class IntreactingDialogue : MonoBehaviour
         {
             dialogueText.text = clothesText;
             dialogueBox.SetActive(true);
+            
             playerNpc = true;
-            Debug.Log("1");
+            //Debug.Log("1");
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -37,7 +42,7 @@ public class IntreactingDialogue : MonoBehaviour
         {
             dialogueBox.SetActive(false);
             playerNpc = false;
-            Debug.Log("2");
+            //Debug.Log("2");
         }
 
     }
