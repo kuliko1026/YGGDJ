@@ -10,6 +10,7 @@ public class HeroController2D : MonoBehaviour
     private Rigidbody2D rigid;
     private Vector3 movement; // 移动向量
     private bool facingRight = true; // 是否面向右边
+    private bool canMove = true;
 
     void Start()
     {
@@ -20,19 +21,29 @@ public class HeroController2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
-        if (Input.GetKey(KeyCode.LeftShift))
-            h *= 2f;
+        if (canMove)
+        {
+            h = Input.GetAxis("Horizontal");
+            v = Input.GetAxis("Vertical");
+            if (Input.GetKey(KeyCode.LeftShift))
+                h *= 2f;
 
-        // 判断翻面
-        if (h > 0 && !facingRight)
-            SetFacing(true);
-        else if (h < 0 && facingRight)
-            SetFacing(false);
+            // 判断翻面
+            if (h > 0 && !facingRight)
+                SetFacing(true);
+            else if (h < 0 && facingRight)
+                SetFacing(false);
 
-        ani.SetFloat("Speed", h);
+            ani.SetFloat("Speed", h);
+        }
+        else
+        {
+            h = 0;
+            v = 0;
+            ani.SetFloat("Speed", 0);
+        }
     }
+
     void SetFacing(bool fr)
     {
         facingRight = fr;
@@ -44,9 +55,23 @@ public class HeroController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        movement = Vector3.zero;
-        movement.x = h * speed;
-        movement.y = rigid.velocity.y;
-        rigid.velocity = movement;
+        if (canMove)
+        {
+            movement = Vector3.zero;
+            movement.x = h * speed;
+            movement.y = rigid.velocity.y;
+            rigid.velocity = movement;
+        }
+        else
+        {
+            rigid.velocity = Vector2.zero;
+        }
+    }
+
+    // 设置玩家是否可以移动
+    public void SetCanMove(bool canMove)
+    {
+        this.canMove = canMove;
     }
 }
+
