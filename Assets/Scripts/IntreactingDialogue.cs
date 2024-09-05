@@ -1,3 +1,4 @@
+using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,10 @@ public class IntreactingDialogue : MonoBehaviour
     public string[] dialogueLines;  //多行对话内容
     public float textSpeed = 0.05f; // 文本显示速度
     public HeroController2D heroController; // 玩家控制脚本
+    public SkeletonAnimation fKeyPrompt; // 提示动画
 
 
-    private bool playerNpc;     //触发判断
+    private bool playerItem;     //触发判断
     private bool isTyping;      // 是否正在逐个显示文本
     private int currentLine = 0; // 当前显示的文本行索引
 
@@ -27,56 +29,86 @@ public class IntreactingDialogue : MonoBehaviour
         {
             Debug.Log($"{gameObject.name}的dialogueLines数组已分配，长度为{dialogueLines.Length}。");
         }
+
+        // 确保提示动画默认隐藏
+        if (fKeyPrompt != null)
+        {
+            fKeyPrompt.gameObject.SetActive(false);
+        }
     }
 
     void Update()
     {
-        // 检测玩家是否在NPC附近并且按下F键
-        if (playerNpc && Input.GetKeyDown(KeyCode.F) && !isTyping)
+        CheckPlayerInput();
+    }
+
+    void CheckPlayerInput()
+    {
+        if (playerItem && Input.GetKeyDown(KeyCode.F) && !isTyping)
         {
-            dialogueBox.SetActive(true);
-            heroController.SetCanMove(false); // 禁用玩家移动
-            StartCoroutine(TypeText(dialogueLines[currentLine]));
+            StartDialogue();
         }
 
-        // 检测鼠标左键或空格键点击以跳转到下一行文本
         if (isTyping && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)))
         {
-            StopAllCoroutines();
-            dialogueText.text = dialogueLines[currentLine];
-            isTyping = false;
+            SkipTyping();
         }
         else if (!isTyping && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)))
         {
-            currentLine++;
-            if (currentLine < dialogueLines.Length)
-            {
-                StartCoroutine(TypeText(dialogueLines[currentLine]));
-            }
-            else
-            {
-                dialogueBox.SetActive(false);
-                heroController.SetCanMove(true); // 启用玩家移动
-                currentLine = 0; // 重置索引以便下次对话
-            }
+            NextLine();
         }
+    }
+
+    void StartDialogue()
+    {
+        dialogueBox.SetActive(true);
+        heroController.SetCanMove(false);
+        StartCoroutine(TypeText(dialogueLines[currentLine = 0]));
+    }
+
+    void SkipTyping()
+    {
+        StopAllCoroutines();
+        dialogueText.text = dialogueLines[currentLine];
+        isTyping = false;
+    }
+
+    void NextLine()
+    {
+        currentLine++;
+        if (currentLine < dialogueLines.Length)
+        {
+            StartCoroutine(TypeText(dialogueLines[currentLine]));
+        }
+        else
+        {
+            EndDialogue();
+        }
+    }
+
+    void EndDialogue()
+    {
+        dialogueBox.SetActive(false);
+        heroController.SetCanMove(true);
+        currentLine = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerNpc = true;
+            fKeyPrompt.gameObject.SetActive(true);
+            playerItem = true;
             Debug.Log($"{gameObject.name}触发区域进入。");
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             dialogueBox.SetActive(false);
-            playerNpc = false;
+            fKeyPrompt.gameObject.SetActive(false);
+            playerItem = false;
             currentLine = 0; // 重置索引以便下次对话
             heroController.SetCanMove(true); // 启用玩家移动
             Debug.Log($"{gameObject.name}触发区域退出。");
