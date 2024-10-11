@@ -1,0 +1,13 @@
+
+道具互动框.png
+size: 171,172
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+图层 1
+  rotate: false
+  xy: 2, 2
+  size: 167, 168
+  orig: 167, 168
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,13 @@
+
+箭头.png
+size: 389,316
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+箭头
+  rotate: false
+  xy: 2, 2
+  size: 385, 312
+  orig: 385, 312
+  offset: 0, 0
+  index: -1
